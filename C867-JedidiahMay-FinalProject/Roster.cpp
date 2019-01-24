@@ -21,23 +21,23 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 {
 	int daysInCourse[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 	//FIX ME
-	
-	Student* student = nullptr;
+	classRosterArray[0] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, degreeProgram);
+	//Student* student = nullptr;
 
-	switch (degreeProgram)
-	{
-	case SECURITY:
-		student->SetStudentID(studentID);
-		break;
-	case NETWORK:
-		student->SetStudentID(studentID);
-		break;
-	case SOFTWARE:
-		student->SetStudentID(studentID);
-		break;
-	default:
-		break;
-	}
+	//switch (degreeProgram)
+	//{
+	//case SECURITY:
+	//	student->SetStudentID(studentID);
+	//	break;
+	//case NETWORK:
+	//	student->SetStudentID(studentID);
+	//	break;
+	//case SOFTWARE:
+	//	student->SetStudentID(studentID);
+	//	break;
+	//default:
+	//	break;
+	//}
 	cout << "FIX ME: Add students to Rosters" << endl;
 }
 
@@ -61,7 +61,7 @@ void Roster::Remove(string studentID)
 }
 
 void Roster::PrintAll()
-{ 
+{
 	for (int i = 0; i < 5; ++i) {
 		this->classRosterArray[i]->Print();
 	}
@@ -163,7 +163,7 @@ int main()
 		string stringDegreeProgram = tempStudentDataArray[i].substr(0, tempStudentDataArray[i].find(','));
 
 		Degree degreeProgram;
-		
+
 		if (stringDegreeProgram == "SECURITY") {
 			degreeProgram = SECURITY;
 		}
@@ -181,8 +181,10 @@ int main()
 		cout << "\t Program: " << degreeProgram << endl << endl;
 		*/
 
-		classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
+		//classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
 	}
+	int testArray[3] = { 3, 4, 5 };
+	classRoster->Add("A1", "John", "Doe", "jdoe@kirby.com", 14, 15, 20, 25, SOFTWARE);
 
 	//Demonstrate functionality:
 
