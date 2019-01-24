@@ -58,6 +58,11 @@ int * Student::GetNumberOfDaysToComplete()
 	return numberOfDaysToComplete;
 }
 
+void Student::Print()
+{
+	//Implementation not necessary as this will be handled by sub classes.
+}
+
 void Student::SetStudentID(string studentID)
 {
 	this->studentID = studentID;

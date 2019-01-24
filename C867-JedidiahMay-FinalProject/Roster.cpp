@@ -44,31 +44,72 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 void Roster::Remove(string studentID)
 {
 	//FIX ME
-	cout << "FIX ME: Remove this guy: " << studentID << endl;
+
+	bool found = false;
+
+	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
+		if (studentID == this->classRosterArray[i]->GetStudentID()) {
+			found = true;
+			classRosterArray[i] = nullptr;
+			break;
+		}
+	}
+
+	if (found == false) {
+		cout << "Student ID \'" << studentID << "\' was not found." << endl;
+	}
 }
 
 void Roster::PrintAll()
 { 
-	//FIX ME
-	cout << "FIX ME: Should Print All" << endl;
+	for (int i = 0; i < 5; ++i) {
+		this->classRosterArray[i]->Print();
+	}
 }
 
 void Roster::PrintAverageDaysInCourse(string studentID)
 {
-	//FIX ME
-	cout << "FIX ME: Should print average Days In Course for this guy: " << studentID << endl;
+	int totalDays = 0;
+	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
+		if (studentID == this->classRosterArray[i]->GetStudentID()) {
+			int* daysInCourse = this->classRosterArray[i]->GetNumberOfDaysToComplete();
+			totalDays += daysInCourse[i];
+			break;
+		}
+	}
+	cout << "Average number of days in courses: " << totalDays / 3 << endl;
 }
 
 void Roster::PrintInvalidEmails()
 {
-	//FIX ME
-	cout << "FIX ME: Should printer invalid emails." << endl;
+	cout << "Students with invalid emails: " << endl;
+	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
+
+		bool invalid = false;
+		string emailAddress = classRosterArray[i]->GetEmailAddress();
+		if (emailAddress.find('@', 0) == string::npos) {
+			invalid = true;
+		}
+		else if (emailAddress.find(' ', 0) != string::npos) {
+			invalid = true;
+		}
+		else if (emailAddress.find('.') == string::npos) {
+			invalid = true;
+		}
+
+		if (invalid == true) {
+			cout << this->classRosterArray[i]->GetFirstName() << " " << this->classRosterArray[i]->GetLastName() << ": " << emailAddress << endl;
+		}
+	}
 }
 
 void Roster::PrintByDegreeProgram(int degreeProgram)
 {
-	//FIX ME
-	cout << "FIX ME: Should print by students in a degree program by integer of this: " << degreeProgram << endl;
+	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
+		if (degreeProgram == this->classRosterArray[i]->GetDegreeProgram()) {
+			classRosterArray[i]->Print();
+		}
+	}
 }
 
 int main()
@@ -82,11 +123,13 @@ int main()
 		"A5,Jedidiah,May,jmay43@wgu.edu,36,15,25,10,SOFTWARE"
 	};
 
+	//Instantiate new class of Roster
 	Roster* classRoster = new Roster();
 
-	string tempStudentDataArray[5];
 	//Extracting arrays from the studentData array above using ',' as the delimeter.
-	for (int i = 0; i < sizeof(studentData) / sizeof(studentData[i]); ++i) {
+	string tempStudentDataArray[5];
+
+	for (int i = 0; i < sizeof(tempStudentDataArray) / sizeof(tempStudentDataArray[i]); ++i) {
 		tempStudentDataArray[i] = studentData[i];
 
 		string ID = tempStudentDataArray[i].substr(0, tempStudentDataArray[i].find(','));
@@ -141,7 +184,9 @@ int main()
 		classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
 	}
 
-	//Demonstrate functionality with these loops:
+	//Demonstrate functionality:
+
+
 	cout << "Course Title: C867 Scripting and Programming Applications" << endl;
 	cout << "Programming Language: C++" << endl;
 	cout << "Student ID: 000817270" << endl;
@@ -151,12 +196,11 @@ int main()
 	classRoster->PrintInvalidEmails();
 
 	//Print average days in course for each student
-	int size = sizeof(classRoster) / sizeof(classRoster[2]);
-	cout << "Roster Size: " << size << endl;
-	//string studentIDArray[] = { "A1", "A2", "A3", "A4", "A5" };
-	//for (int i = 0; i < sizeof(classRoster) / sizeof(classRoster[i]); ++i) {
-	//	classRoster[i].PrintAverageDaysInCourse("A1");
-	//}
+
+	string studentIDArray[] = { "A1", "A2", "A3", "A4", "A5" };
+	for (int i = 0; i < sizeof(classRoster) / sizeof(classRoster[i]); ++i) {
+		classRoster[i].PrintAverageDaysInCourse(studentIDArray[i]);
+	}
 	classRoster->PrintByDegreeProgram(SOFTWARE);
 	classRoster->Remove("A3");
 	classRoster->Remove("A3");

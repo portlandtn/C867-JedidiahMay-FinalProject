@@ -22,9 +22,11 @@ public:
 	int GetAge() const;
 	int* GetNumberOfDaysToComplete();
 	
-	//Pure virtual functions - no implementations necessary on Student class
+	//Pure virtual function - no implementations necessary on Student class as this will be handled by sub classes.
 	virtual Degree GetDegreeProgram() = 0;
-	virtual void Print() = 0;
+
+	//Handled by sub clases
+	virtual void Print();
 
 	//Mutator Methods
 	void SetStudentID(string);
