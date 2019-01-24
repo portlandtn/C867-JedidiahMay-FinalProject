@@ -3,5 +3,5 @@
 enum Degree {
 	SECURITY,
 	NETWORK,
-	STUDENT
+	SOFTWARE
 };
