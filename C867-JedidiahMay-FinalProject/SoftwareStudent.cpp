@@ -10,7 +10,7 @@ SoftwareStudent::~SoftwareStudent()
 {
 }
 
-SoftwareStudent::SoftwareStudent(string, string, string, string, int, int *, Degree)
+SoftwareStudent::SoftwareStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int* numberOfDaysToCompleteCourse, Degree degreeProgram)
 {
 }
 

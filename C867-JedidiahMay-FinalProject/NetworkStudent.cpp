@@ -10,7 +10,7 @@ NetworkStudent::~NetworkStudent()
 {
 }
 
-NetworkStudent::NetworkStudent(string, string, string, string, int, int *, Degree)
+NetworkStudent::NetworkStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int* numberOfDaysToCompleteCourse, Degree degreeProgram)
 {
 }
 

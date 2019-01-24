@@ -15,11 +15,11 @@ public:
 	~Student();
 
 	//Accessor Methods
-	string GetStudentID();
-	string GetFirstName();
-	string GetLastName();
-	string GetEmailAddress();
-	int GetAge();
+	string GetStudentID() const;
+	string GetFirstName() const;
+	string GetLastName() const;
+	string GetEmailAddress() const;
+	int GetAge() const;
 	int* GetNumberOfDaysToComplete();
 	
 	//Pure virtual functions - no implementations necessary on Student class

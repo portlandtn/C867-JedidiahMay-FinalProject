@@ -5,67 +5,85 @@ using namespace std;
 
 Student::Student()
 {
+	this->studentID = "";
+	this->firstName = "";
+	this->lastName = "";
+	this->emailAddress = "";
+	this->age = 0;
+	this->numberOfDaysToComplete[3];
 }
 
 
-Student::Student(string, string, string, string, int, int *, Degree)
+Student::Student(string studentID, string firstName, string lastName, string emailAddress, int age, int * numberOfDaysToComplete, Degree)
 {
+	this->studentID = studentID;
+	this->firstName = firstName;
+	this->lastName = lastName;
+	this->emailAddress = emailAddress;
+	this->age = age;
+	this->numberOfDaysToComplete = numberOfDaysToComplete;
 }
 
 Student::~Student()
 {
 }
 
-string Student::GetStudentID()
+string Student::GetStudentID() const
 {
-	return string();
+	return studentID;
 }
 
-string Student::GetFirstName()
+string Student::GetFirstName() const
 {
-	return string();
+	return firstName;
 }
 
-string Student::GetLastName()
+string Student::GetLastName() const
 {
-	return string();
+	return lastName;
 }
 
-string Student::GetEmailAddress()
+string Student::GetEmailAddress() const
 {
-	return string();
+	return emailAddress;
 }
 
-int Student::GetAge()
+int Student::GetAge() const
 {
-	return 0;
+	return age;
 }
 
 int * Student::GetNumberOfDaysToComplete()
 {
-	return nullptr;
+	return numberOfDaysToComplete;
 }
 
-void Student::SetStudentID(string)
+void Student::SetStudentID(string studentID)
 {
+	this->studentID = studentID;
 }
 
-void Student::SetFirstName(string)
+void Student::SetFirstName(string firstName)
 {
+	this->firstName = firstName;
 }
 
-void Student::SetLastName(string)
+void Student::SetLastName(string lastName)
 {
+	this->lastName = lastName;
 }
 
-void Student::SetEmailAddress(string)
+void Student::SetEmailAddress(string emailAddress)
 {
+	this->emailAddress = emailAddress;
 }
 
-void Student::SetAge(int)
+void Student::SetAge(int age)
 {
+	this->age = age;
 }
 
-void Student::SetNumberOfDaysToComplete(int *)
+void Student::SetNumberOfDaysToComplete(int * numberOfDaysToComplete)
 {
+	this->numberOfDaysToComplete = numberOfDaysToComplete;
 }

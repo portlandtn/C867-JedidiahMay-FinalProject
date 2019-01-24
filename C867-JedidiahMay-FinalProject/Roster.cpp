@@ -21,6 +21,23 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 {
 	int daysInCourse[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 	//FIX ME
+	
+	Student* student = nullptr;
+
+	switch (degreeProgram)
+	{
+	case SECURITY:
+		student->SetStudentID(studentID);
+		break;
+	case NETWORK:
+		student->SetStudentID(studentID);
+		break;
+	case SOFTWARE:
+		student->SetStudentID(studentID);
+		break;
+	default:
+		break;
+	}
 	cout << "FIX ME: Add students to Rosters" << endl;
 }
 
@@ -115,9 +132,11 @@ int main()
 		}
 
 		//Used to verify parsing of data worked correctly
-		//cout << "ID: " << ID << "\t Name: " << firstName << " " << lastName << "\t Email: " << email;
-		//cout << "\t Age: " << age << "\t Course 1: " << days1 << " 2: " << days2 << " 3: " << days3;
-		//cout << "\t Program: " << degreeProgram << endl << endl;
+		/*
+		cout << "ID: " << ID << "\t Name: " << firstName << " " << lastName << "\t Email: " << email;
+		cout << "\t Age: " << age << "\t Course 1: " << days1 << " 2: " << days2 << " 3: " << days3;
+		cout << "\t Program: " << degreeProgram << endl << endl;
+		*/
 
 		classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
 	}
@@ -131,9 +150,13 @@ int main()
 	classRoster->PrintAll();
 	classRoster->PrintInvalidEmails();
 
-	for (int i = 0; i < sizeof(classRoster) / sizeof(classRoster[i]); ++i) {
-		
-	}
+	//Print average days in course for each student
+	int size = sizeof(classRoster) / sizeof(classRoster[2]);
+	cout << "Roster Size: " << size << endl;
+	//string studentIDArray[] = { "A1", "A2", "A3", "A4", "A5" };
+	//for (int i = 0; i < sizeof(classRoster) / sizeof(classRoster[i]); ++i) {
+	//	classRoster[i].PrintAverageDaysInCourse("A1");
+	//}
 	classRoster->PrintByDegreeProgram(SOFTWARE);
 	classRoster->Remove("A3");
 	classRoster->Remove("A3");
