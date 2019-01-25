@@ -17,5 +17,6 @@ public:
 	void PrintByDegreeProgram(int);
 
 private:
-	Student* classRosterArray[];
+	Student* classRosterArray[5];
+	int arraySize = 0;
 };

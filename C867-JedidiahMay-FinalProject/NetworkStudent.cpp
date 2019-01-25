@@ -10,13 +10,14 @@ NetworkStudent::~NetworkStudent()
 {
 }
 
-NetworkStudent::NetworkStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int* numberOfDaysToCompleteCourse, Degree degreeProgram)
+NetworkStudent::NetworkStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int* numberOfDaysToCompleteCourse, Degree degreeProgram) : 
+	Student(studentID,firstName,lastName,emailAddress,age,numberOfDaysToCompleteCourse,degreeProgram)
 {
 }
 
 Degree NetworkStudent::GetDegreeProgram()
 {
-	return Degree();
+	return degreeProgram;
 }
 
 //Overrides Print function in Student class

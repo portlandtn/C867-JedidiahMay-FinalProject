@@ -10,13 +10,15 @@ SoftwareStudent::~SoftwareStudent()
 {
 }
 
-SoftwareStudent::SoftwareStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int* numberOfDaysToCompleteCourse, Degree degreeProgram)
+SoftwareStudent::SoftwareStudent(string studentID, string firstName, string lastName, string emailAddress, int age, int* numberOfDaysToCompleteCourse, Degree degreeProgram) :
+	Student(studentID, firstName, lastName, emailAddress, age, numberOfDaysToCompleteCourse, degreeProgram)
+
 {
 }
 
 Degree SoftwareStudent::GetDegreeProgram()
 {
-	return Degree();
+	return degreeProgram;
 }
 
 //Overrides Print function in Student class

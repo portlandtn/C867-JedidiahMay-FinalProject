@@ -20,25 +20,23 @@ Roster::~Roster()
 void Roster::Add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degreeProgram)
 {
 	int daysInCourse[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
-	//FIX ME
-	classRosterArray[0] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, degreeProgram);
-	//Student* student = nullptr;
 
-	//switch (degreeProgram)
-	//{
-	//case SECURITY:
-	//	student->SetStudentID(studentID);
-	//	break;
-	//case NETWORK:
-	//	student->SetStudentID(studentID);
-	//	break;
-	//case SOFTWARE:
-	//	student->SetStudentID(studentID);
-	//	break;
-	//default:
-	//	break;
-	//}
-	cout << "FIX ME: Add students to Rosters" << endl;
+	switch (degreeProgram)
+	{
+	case SECURITY:
+		classRosterArray[arraySize] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, degreeProgram);
+		break;
+	case NETWORK:
+		classRosterArray[arraySize] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, degreeProgram);
+		break;
+	case SOFTWARE:
+		classRosterArray[arraySize] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, daysInCourse, degreeProgram);
+		break;
+	default:
+		break;
+	}
+	++arraySize;
+
 }
 
 void Roster::Remove(string studentID)
@@ -46,22 +44,28 @@ void Roster::Remove(string studentID)
 	//FIX ME
 
 	bool found = false;
-
-	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
-		if (studentID == this->classRosterArray[i]->GetStudentID()) {
-			found = true;
-			classRosterArray[i] = nullptr;
-			break;
+	try {
+		for (int i = 0; i < 5; ++i) {
+			if (studentID == this->classRosterArray[i]->GetStudentID()) {
+				found = true;
+				classRosterArray[i] = nullptr;
+				break;
+			}
 		}
 	}
+	catch (const exception&) {
 
+	}
 	if (found == false) {
 		cout << "Student ID \'" << studentID << "\' was not found." << endl;
 	}
+
+
 }
 
 void Roster::PrintAll()
 {
+	//Access violation FIX ME
 	for (int i = 0; i < 5; ++i) {
 		this->classRosterArray[i]->Print();
 	}
@@ -69,21 +73,26 @@ void Roster::PrintAll()
 
 void Roster::PrintAverageDaysInCourse(string studentID)
 {
-	int totalDays = 0;
-	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
-		if (studentID == this->classRosterArray[i]->GetStudentID()) {
-			int* daysInCourse = this->classRosterArray[i]->GetNumberOfDaysToComplete();
-			totalDays += daysInCourse[i];
-			break;
-		}
-	}
-	cout << "Average number of days in courses: " << totalDays / 3 << endl;
+	//Must fix! Pointing at addresses, not values.
+	//for (int i = 0; i < 5; ++i) {
+	//	if (studentID == this->classRosterArray[i]->GetStudentID()) {
+	//		int* totalDays;
+	//		totalDays& = this->classRosterArray[i]->GetNumberOfDaysToComplete();
+
+	//		cout << this->classRosterArray[i]->GetNumberOfDaysToComplete();
+			//for (int j = 0; j < 3; ++j) {
+			//	totalDays += (this->classRosterArray[i]->GetNumberOfDaysToComplete()[j]);
+			//}
+			//cout << "Student ID: " << studentID << "\t Average time to finish three courses: "
+			//	<< totalDays / 3;
+	//	}
+	//}
 }
 
 void Roster::PrintInvalidEmails()
 {
 	cout << "Students with invalid emails: " << endl;
-	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
+	for (int i = 0; i < 5; ++i) {
 
 		bool invalid = false;
 		string emailAddress = classRosterArray[i]->GetEmailAddress();
@@ -105,7 +114,7 @@ void Roster::PrintInvalidEmails()
 
 void Roster::PrintByDegreeProgram(int degreeProgram)
 {
-	for (int i = 0; i < sizeof(*classRosterArray) / sizeof(classRosterArray[i]); ++i) {
+	for (int i = 0; i < 5; ++i) {
 		if (degreeProgram == this->classRosterArray[i]->GetDegreeProgram()) {
 			classRosterArray[i]->Print();
 		}
@@ -181,10 +190,10 @@ int main()
 		cout << "\t Program: " << degreeProgram << endl << endl;
 		*/
 
-		//classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
+		classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
 	}
-	int testArray[3] = { 3, 4, 5 };
-	classRoster->Add("A1", "John", "Doe", "jdoe@kirby.com", 14, 15, 20, 25, SOFTWARE);
+
+
 
 	//Demonstrate functionality:
 
@@ -200,12 +209,12 @@ int main()
 	//Print average days in course for each student
 
 	string studentIDArray[] = { "A1", "A2", "A3", "A4", "A5" };
-	for (int i = 0; i < sizeof(classRoster) / sizeof(classRoster[i]); ++i) {
+	for (int i = 0; i < 5; ++i) {
 		classRoster[i].PrintAverageDaysInCourse(studentIDArray[i]);
 	}
 	classRoster->PrintByDegreeProgram(SOFTWARE);
 	classRoster->Remove("A3");
-	classRoster->Remove("A3");
+	//classRoster->Remove("A3");
 
 	//Destructor
 	delete classRoster;
