@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "Roster.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -60,7 +61,6 @@ void Roster::Remove(string studentID)
 
 void Roster::PrintAll()
 {
-	//Access violation FIX ME
 	cout << "Class Roster: " << endl;
 	for (int i = 0; i < 5; ++i) {
 		this->classRosterArray[i]->Print();
@@ -76,7 +76,7 @@ void Roster::PrintAverageDaysInCourse(string studentID)
 			found = true;
 			int totalDays = 0;
 
-			//Iterate through each number of day, add to total
+			//Iterate through each number of days, add to total
 			for (int j = 0; j < 3; ++j) {
 				totalDays += (classRosterArray[i]->GetNumberOfDaysToComplete()[j]);
 			}
@@ -197,11 +197,18 @@ int main()
 	}
 
 	//Demonstrate functionality:
-
-	cout << "Course Title: C867 Scripting and Programming Applications" << endl;
-	cout << "Programming Language: C++" << endl;
-	cout << "Student ID: 000817270" << endl;
-	cout << "Name: Jedidiah May" << endl << endl;
+	int widthLeft = 22;
+	cout << setfill('*') << setw(66) << left << "*" << endl;
+	cout << setfill(' ');
+	cout << setw(widthLeft) << left << "Course Title" << "|";
+	cout << "C867 Scripting and Programming Applications" << endl;
+	cout << setw(widthLeft) << left << "Programming Language" << "|";
+	cout << "C++" << endl;
+	cout << setw(widthLeft) << left << "Student" << "|";
+	cout << "000817270" << endl;
+	cout << setw(widthLeft) << left << "Name" << "|";
+	cout << "Jedidiah May" << endl;
+	cout << setfill('*') << setw(66) << left << "*" << endl << endl;
 
 	classRoster->PrintAll();
 	cout << endl;
