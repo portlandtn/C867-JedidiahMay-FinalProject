@@ -41,31 +41,27 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 
 void Roster::Remove(string studentID)
 {
-	//FIX ME
-
-	bool found = false;
-	try {
-		for (int i = 0; i < 5; ++i) {
-			if (studentID == this->classRosterArray[i]->GetStudentID()) {
-				found = true;
+	cout << "Searching for student \'" << studentID << "\' to be removed." << endl;
+	bool removed = false;
+	for (int i = 0; i < 5; i++) {
+		if (classRosterArray[i] != NULL) {
+			if (studentID == classRosterArray[i]->GetStudentID()) {
 				classRosterArray[i] = nullptr;
+				removed = true;
+				cout << "Student \'" << studentID << "\' has been removed." << endl;
 				break;
 			}
 		}
 	}
-	catch (const exception&) {
-
+	if (!removed) {
+		cout << "Student ID \'" << studentID << "\' does not exist." << endl;
 	}
-	if (found == false) {
-		cout << "Student ID \'" << studentID << "\' was not found." << endl;
-	}
-
-
 }
 
 void Roster::PrintAll()
 {
 	//Access violation FIX ME
+	cout << "Class Roster: " << endl;
 	for (int i = 0; i < 5; ++i) {
 		this->classRosterArray[i]->Print();
 	}
@@ -73,20 +69,25 @@ void Roster::PrintAll()
 
 void Roster::PrintAverageDaysInCourse(string studentID)
 {
-	//Must fix! Pointing at addresses, not values.
-	//for (int i = 0; i < 5; ++i) {
-	//	if (studentID == this->classRosterArray[i]->GetStudentID()) {
-	//		int* totalDays;
-	//		totalDays& = this->classRosterArray[i]->GetNumberOfDaysToComplete();
+	bool found = false;
+	//Iterate through each student to find a match to student ID
+	for (int i = 0; i < 5; ++i) {
+		if (studentID == this->classRosterArray[i]->GetStudentID()) {
+			found = true;
+			int totalDays = 0;
 
-	//		cout << this->classRosterArray[i]->GetNumberOfDaysToComplete();
-			//for (int j = 0; j < 3; ++j) {
-			//	totalDays += (this->classRosterArray[i]->GetNumberOfDaysToComplete()[j]);
-			//}
-			//cout << "Student ID: " << studentID << "\t Average time to finish three courses: "
-			//	<< totalDays / 3;
-	//	}
-	//}
+			//Iterate through each number of day, add to total
+			for (int j = 0; j < 3; ++j) {
+				totalDays += (classRosterArray[i]->GetNumberOfDaysToComplete()[j]);
+			}
+			//Output, divide total by three for the average
+			cout << "Student ID: " << studentID << "\t Average time to finish three courses: "
+				<< totalDays / 3 << endl;
+		}
+		if (found) {
+			break;
+		}
+	}
 }
 
 void Roster::PrintInvalidEmails()
@@ -114,11 +115,13 @@ void Roster::PrintInvalidEmails()
 
 void Roster::PrintByDegreeProgram(int degreeProgram)
 {
+	cout << "Printing by Degree Program: Software" << endl;
 	for (int i = 0; i < 5; ++i) {
 		if (degreeProgram == this->classRosterArray[i]->GetDegreeProgram()) {
 			classRosterArray[i]->Print();
 		}
 	}
+	cout << endl;
 }
 
 int main()
@@ -129,7 +132,7 @@ int main()
 		"A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 		"A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
 		"A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-		"A5,Jedidiah,May,jmay43@wgu.edu,36,15,25,10,SOFTWARE"
+		"A5,Jedidiah,May    ,jmay43@wgu.edu,36,15,25,10,SOFTWARE"
 	};
 
 	//Instantiate new class of Roster
@@ -193,10 +196,7 @@ int main()
 		classRoster->Add(ID, firstName, lastName, email, age, days1, days2, days3, degreeProgram);
 	}
 
-
-
 	//Demonstrate functionality:
-
 
 	cout << "Course Title: C867 Scripting and Programming Applications" << endl;
 	cout << "Programming Language: C++" << endl;
@@ -204,17 +204,21 @@ int main()
 	cout << "Name: Jedidiah May" << endl << endl;
 
 	classRoster->PrintAll();
+	cout << endl;
 	classRoster->PrintInvalidEmails();
+	cout << endl;
 
 	//Print average days in course for each student
-
+	cout << "Average days in three courses for each student: " << endl;
 	string studentIDArray[] = { "A1", "A2", "A3", "A4", "A5" };
 	for (int i = 0; i < 5; ++i) {
-		classRoster[i].PrintAverageDaysInCourse(studentIDArray[i]);
+		classRoster->PrintAverageDaysInCourse(studentIDArray[i]);
 	}
+	cout << endl;
+
 	classRoster->PrintByDegreeProgram(SOFTWARE);
 	classRoster->Remove("A3");
-	//classRoster->Remove("A3");
+	classRoster->Remove("A3");
 
 	//Destructor
 	delete classRoster;

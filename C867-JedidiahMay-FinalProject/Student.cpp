@@ -10,7 +10,9 @@ Student::Student()
 	this->lastName = "";
 	this->emailAddress = "";
 	this->age = 0;
-	this->numberOfDaysToComplete[3];
+	for (int i = 0; i < 3; ++i) {
+		this->numberOfDaysToComplete[i] = 0;
+	}
 }
 
 
@@ -21,7 +23,9 @@ Student::Student(string studentID, string firstName, string lastName, string ema
 	this->lastName = lastName;
 	this->emailAddress = emailAddress;
 	this->age = age;
-	this->numberOfDaysToComplete = numberOfDaysToComplete;
+	for (int i = 0; i < 3; ++i) {
+		this->numberOfDaysToComplete[i] = numberOfDaysToComplete[i];
+	}
 }
 
 Student::~Student()
@@ -90,5 +94,8 @@ void Student::SetAge(int age)
 
 void Student::SetNumberOfDaysToComplete(int * numberOfDaysToComplete)
 {
-	this->numberOfDaysToComplete = numberOfDaysToComplete;
+	//this->numberOfDaysToComplete = numberOfDaysToComplete;
+	for (int i = 0; i < 3; ++i) {
+		this->numberOfDaysToComplete[i] = numberOfDaysToComplete[i];
+	}
 }

@@ -42,7 +42,7 @@ private:
 	string lastName;
 	string emailAddress;
 	int age;
-	int* numberOfDaysToComplete;
+	int numberOfDaysToComplete[3];
 	Degree degreeProgram;
 };
 

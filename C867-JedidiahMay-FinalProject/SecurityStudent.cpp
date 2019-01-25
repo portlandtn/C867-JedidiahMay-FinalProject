@@ -27,8 +27,8 @@ void SecurityStudent::Print()
 	cout << "Student ID: " << GetStudentID() << "\t First Name: " << GetFirstName() << "\t Last Name: " << GetLastName() << "\t Age: " << GetAge() << "\t";
 
 	for (int i = 0; i < 3; ++i) {
-		cout << "Number of Days to Complete Course " << i + 1 << ": " << GetNumberOfDaysToComplete()[i] << "\t";
+		cout << "No. Days Course " << i + 1 << ": " << GetNumberOfDaysToComplete()[i] << "\t";
 	}
-	cout << "Degree Program: " << this->GetDegreeProgram() << endl;
+	cout << "Degree Program: Security" << endl;
 }
 
